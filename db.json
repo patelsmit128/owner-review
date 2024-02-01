@@ -1,4 +1,81 @@
 {
-   "review" :"best society"
+    "states": [
+      {
+        "name": "karnataka",
+        "cities": [
+          {
+            "name": "banglore",
+            "societies":[
+                {
+                "name": "sonestta",
+                "owner":[
+                    {
+                        "name":"vijaymadarchod",
+                        "review":["he is very bad ","he is very madarchod"]
+                    }
+                ]
+                }
 
-}
+            ]
+          
+          },
+          {
+            "name": "manglore",
+            "societies":[
+                {
+                "name": "mng1",
+                "owner":[
+                    {
+                        "name":"smit",
+                        "review":["not every southindian is chutiya people","he is very madarchod"]
+                    }
+                ]
+                }
+
+            ]
+          
+          }
+       
+        ]
+      },
+      {
+        "name": "gujarat",
+        "cities": [
+          {
+            "name": "patan",
+            "societies":[
+                {
+                "name": "pat1",
+                "owner":[
+                    {
+                        "name":"cskdcb",
+                        "review":["he is very good","he is very good"]
+                    }
+                ]
+                }
+
+            ]
+          
+          },
+          {
+            "name": "vadodra",
+            "societies":[
+                {
+                "name": "igreentarsali",
+                "owner":[
+                    {
+                        "name":"pratik",
+                        "review":["gujju is good","he is very very good"]
+                    }
+                ]
+                }
+
+            ]
+          
+          }
+       
+        ]
+      }
+    ]
+  }
+  
