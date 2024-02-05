@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet ,Alert} from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import HomeScreen from "./HomeScreen";
 import data from "./db.json";
-import react,{Component} from "react";
-// import { Dropdown } from 'react-native-element-dropdown';
-// import DropDownPicker from 'react-native-dropdown-picker';
-// import fs from 'fs-extra';
+import DropDownPicker from 'react-native-dropdown-picker';
+import * as FileSystem from 'expo-file-system';
+import * as DocumentPicker from "expo-document-picker";
+// import fileContent from './db.json';
 
 
 
 
-
-export default function GiveReviewScreen() {
+export default function GiveReviewScreen({ navigation }) {
   
 
    const [reviewText, setReviewText] = useState("");
-   const [cityName,setCityName] = useState("");
-   const [societyName,setSocietyName] = useState("");
+  //  const [cityName,setCityName] = useState("");
+  //  const [societyName,setSocietyName] = useState("");
    const [ownerName,setOwnerName] = useState("");
    const [open, setOpen] = useState(false);
  //  const [value, setValue] = useState(null);
@@ -27,51 +26,86 @@ export default function GiveReviewScreen() {
 
   
 
-  //  const states = data.states.map((state) => ({
-  //   label: state.name,
-  //   value: state.name,
-  //     }));
+   const states = data.states.map((state) => ({
+    label: state.name,
+    value: state.name,
+      }));
   
 
-  // const cities = stateValue
-  //   ? data.states.find((state) => state.name === stateValue)?.cities.map((city) => ({
-  //       label: city.name,
-  //       value: city.name,
-  //     }))
-  //   : [];
+  const cities = stateValue
+    ? data.states.find((state) => state.name === stateValue)?.cities.map((city) => ({
+        label: city.name,
+        value: city.name,
+      }))
+    : [];
 
-  //   const societies = cityValue
-  //   ? data.states.find((state) => state.name === stateValue)
-  //       .cities.find((city) => city.name === cityValue)?.societies.map((society) => ({
-  //         label: society.name,
-  //         value: society.name,
-  //       }))
-  //   : [];
-
-    // const appendToDb = async () => {
-    //     // Construct the new data to append
-    //     const newData = {
-    //       name: societyValue,
-    //       owner: [
-    //         {
-    //           name: ownerName,
-    //           review: [reviewText],
-    //         },
-    //       ],
-    //     };
-    // }
-    // const existingData = data.states.find((state) => state.name === stateValue)
-    //                 ?.cities.find((city) => city.name === cityValue)?.societies;
+    const societies = cityValue
+    ? data.states.find((state) => state.name === stateValue)
+        .cities.find((city) => city.name === cityValue)?.societies.map((society) => ({
+          label: society.name,
+          value: society.name,
+        }))
+    : [];
 
     
-    
-    
+    const filePath = './db.json';
+
+    // const saveDataToJsonFile = async () => {
+      
+    //   // const fileContent = await require('./db.json');
+    //   const existingData = require('./db.json');
+    //   console.log(existingData);
+    //   console.log(existingData.states[0].cities[0].societies[0].owner);
+
+    //   const stateIndex = existingData.states.findIndex((state) => state.name === stateValue);
+    //   const cityIndex = existingData.states[stateIndex].cities.findIndex((city) => city.name === cityValue);
+    //   const societyIndex = existingData.states[stateIndex].cities[cityIndex].societies.findIndex((society) => society.name === societyValue);
+    //   const newData = {
+    //     ownerName,
+    //     reviewText,
+    //   };
+    //   existingData.states[stateIndex].cities[cityIndex].societies[societyIndex].owner.someKey = newData;
+
+
+
+    // // existingData.someKey = newData;
+    // console.log(existingData.states[0].cities[0].societies[0].owner);
+
+    // //   const updatedData = JSON.stringify(existingData);
+    // //   await FileSystem.writeAsStringAsync(filePath, updatedData, {
+    // //     encoding: FileSystem.EncodingType.UTF8,
+
+    // // });
+    // };
+
+    const handleConfirmation = () => {
+      Alert.alert(
+        'Save Data',
+        'Are you sure you want to save the data?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: 'OK',
+            onPress: () => {
+              // saveDataToJsonFile();
+              navigation.navigate('HomeScreen');
+              console.log("success");
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    };
     
 
   const handleSubmitReview = () => {
     // Handle submitting the review with selectedPlace value
-    console.log(ownerName)
-    console.log(reviewText)
+    console.log(ownerName);
+    console.log(reviewText);
   //  console.log(cityName)
   //  console.log(societyName)
   //  console.log(value)
@@ -82,11 +116,12 @@ export default function GiveReviewScreen() {
   //  console.log(newData)
   //  console.log(existingData)
   //  console.log(answer)
-   var answer = confirm("Save data?");
-   if(answer){
-      navigation.navigate('HomeScreen')
-   }
-   
+  //  var answer = confirm("Save data?");
+  //  if(answer){
+  //     navigation.navigate('HomeScreen')
+  //  }
+   console.log("submitting...");
+   handleConfirmation();
     // ...
   };
 
@@ -95,7 +130,7 @@ export default function GiveReviewScreen() {
   return (
     <View style={styles.container}>
      
-     {/* <DropDownPicker
+     <DropDownPicker
         open={open}
         placeholder="Select State"
         value={stateValue}
@@ -124,12 +159,12 @@ export default function GiveReviewScreen() {
           setOpen={setOpen}
           setValue={setSocietyValue}
         />
-      )} */}
+      )}
      
     
       <TextInput
         style={styles.reviewInput}
-        placeholder="Enter owner name"
+        placeholder="Enter owner name hello bc"
         multiline
         value={ownerName}
         onChangeText={(text) => setOwnerName(text)}

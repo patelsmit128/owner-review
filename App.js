@@ -6,13 +6,14 @@ import HomeScreen from './HomeScreen';  // Import your HomeScreen component
 import GiveReviewScreen from './GiveReviewScreen';
 import SeeReviewScreen from './SeeReviewScreen';
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Navigator initialRouteName="HomeScreen">
+        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
         <Stack.Screen name="GiveReview" component={GiveReviewScreen}/>
         <Stack.Screen name="SeeReview" component={SeeReviewScreen}/>
       </Stack.Navigator>
